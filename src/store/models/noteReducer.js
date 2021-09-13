@@ -10,11 +10,21 @@ const noteReducer = {
       };
     },
     editNote: (state, { id, content }) => {
-      const indexOfEditNote = state.allNotes.findIndex(
-        (note) => note.id === id,
-      );
-      if (indexOfEditNote !== -1) state[indexOfEditNote].content = content;
-      return state;
+      // const indexOfEditNote = state.allNotes.findIndex(
+      //   (note) => note.id === id,
+      // );
+      // if (indexOfEditNote !== -1) state[indexOfEditNote].content = content;
+      // return state;
+      const newNote = state.allNotes.map((note) => {
+        if (note.id === id) {
+          note.content = content;
+        }
+        return note;
+      });
+      return {
+        // ...state,
+        allNotes: [...newNote],
+      };
     },
     removeNote: (state, payload) => {
       const idRemove = payload;
